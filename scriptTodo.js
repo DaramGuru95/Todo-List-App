@@ -102,3 +102,58 @@ function addTodoItem() {
 addTodoEle.onclick = function () {
   addTodoItem();
 };
+
+// Local Storage in JavaScript
+let name = localStorage.getItem("name");
+let age = localStorage.getItem("age");
+let city = localStorage.getItem("city");
+let location2 = localStorage.getItem("location");
+
+console.log(name);
+console.log(age);
+console.log(city);
+console.log(location2);
+
+let textEle = document.createElement("textarea");
+textEle.cols = 50;
+textEle.rows = 5;
+let btnEle = document.createElement("button");
+btnEle.textContent = "Save Button";
+
+todoItemsElement.appendChild(textEle);
+todoItemsElement.appendChild(btnEle);
+
+btnEle.onclick = function () {
+  let userEneteredValue = textEle.value;
+  localStorage.setItem("userEneteredValue", userEneteredValue);
+};
+
+let getText = localStorage.getItem("userEneteredValue");
+console.log("Local Storage", getText);
+if (getText === null) {
+  textEle.value = "";
+} else {
+  textEle.value = getText;
+}
+
+let countValue = document.getElementById("countValue");
+countValue.style.color = "#c20a72";
+let btnUpdate = document.getElementById("btnUpdate");
+
+let clickCount = localStorage.getItem("updateCount");
+console.log(clickCount);
+
+if (clickCount === 0) {
+  countValue.textContent = 0;
+} else {
+  countValue.textContent = clickCount;
+}
+
+btnUpdate.onclick = function () {
+  let previousCount = countValue.textContent;
+  let updateCount = parseInt(previousCount) + 1;
+  console.log(updateCount);
+
+  localStorage.setItem("updateCount", updateCount);
+  countValue.textContent = updateCount;
+};
